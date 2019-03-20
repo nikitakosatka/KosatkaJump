@@ -1,10 +1,12 @@
 #include <iostream>
 #include "TXLib.h"
+#include "kosatkajump/game.h"
 
 using namespace std;
 
 int main() {
-    txCreateWindow(400, 800);
+    Game game;
+    game.Run();
 
     return 0;
 }
