@@ -1,4 +1,9 @@
 #include <iostream>
+#include <sstream>
+#include <cmath>
+#include <string>
+#include <stdio.h>
+#include <stdlib.h>
 #include "TXLib.h"
 
 class Player {
@@ -29,14 +34,14 @@ class Player {
         void control() {
             if (GetAsyncKeyState(VK_LEFT)) {
                 x -= 2;
-                if (x < -39)
-                    x = 360;
+                if (x < -22)
+                    x = 377;
             }
 
             if (GetAsyncKeyState(VK_RIGHT)) {
                 x += 2;
-                if (x > 361)
-                    x = -38;
+                if (x > 378)
+                    x = -22;
             }
         }
 };

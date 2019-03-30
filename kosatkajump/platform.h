@@ -4,7 +4,7 @@
 class Platform {
     public:
         HDC platform = txLoadImage("data\\images\\platform.bmp");
-        int x;
+        double x;
         double y;
 
         Platform(int X, double Y) {
@@ -22,7 +22,7 @@ class Platform {
         }
 
         void spawn() {
-            txBitBlt(txDC(), x, y, 400, 800, platform, 0, 0);
+            txTransparentBlt(txDC(), x, y, 77, 16, platform, 0, 0, RGB(255, 255, 255));
         }
 
         void update(double speeding) {
@@ -31,6 +31,6 @@ class Platform {
             }
 
             y += speeding;
-            txBitBlt(txDC(), x, y, 400, 800, platform, 0, 0);
+            txTransparentBlt(txDC(), x, y, 77, 16, platform, 0, 0, RGB(255, 255, 255));
         }
 };
