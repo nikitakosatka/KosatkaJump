@@ -7,14 +7,19 @@
 
 class Game {
     public:
-        void Run() {
+        Game() {
             txCreateWindow(400, 800);
+        }
+
+        void Run() {
             HDC background = txLoadImage("data\\images\\background.bmp");
 
             double coordinates[2] = {0, -800};
 
             StartScreen start;
             start.Run();
+
+            //Platform platforms[5];
 
             Platform platform1(rand() & 200, 100);
             Platform platform2(rand() & 200, 300);
@@ -36,7 +41,7 @@ class Game {
                 platform4.spawn();
                 platform5.spawn();
 
-                if (coordinates[1] <= 0 and coordinates[1] >= 5) {
+                if (coordinates[0] >= 800) {
                     coordinates[0] = 0;
                     coordinates[1] = -800;
                 }
@@ -66,8 +71,10 @@ class Game {
             }
 
             txDeleteDC(background);
+
             txEnd();
         }
+
 
         void death() {
             DeathScreen death;
