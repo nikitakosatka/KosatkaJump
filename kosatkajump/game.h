@@ -73,13 +73,32 @@ class Game {
 
                 player.update();
 
-                if (player.speeding < 0 and ((player.y > platform1.y and player.y < platform1.y + 6) or
-                                             (player.y > platform2.y and player.y < platform2.y + 6) or
-                                             (player.y > platform3.y and player.y < platform3.y + 6) or
-                                             (player.y > platform4.y and player.y < platform4.y + 6) or
-                                             (player.y > platform5.y and player.y < platform5.y + 6))) {
-                    player.speeding = 5;
+                if (player.speeding < 0 and ((player.y + 38 > platform1.y and player.y + 38 < platform1.y + 15 and
+                                              player.x + 20 > platform1.x and player.x + 20 < platform1.x + 40) or
+                                             (player.y + 38 > platform2.y and player.y + 38 < platform2.y + 15 and
+                                              player.x + 20 > platform2.x and player.x + 20 < platform2.x + 40) or
+                                             (player.y + 38 > platform3.y and player.y + 38 < platform3.y + 15 and
+                                              player.x + 20 > platform3.x and player.x + 20 < platform3.x + 40) or
+                                             (player.y + 38 > platform4.y and player.y + 38 < platform4.y + 5 and
+                                              player.x + 20 > platform4.x and player.x + 20 < platform4.x + 40) or
+                                             (player.y + 38 > platform5.y and player.y + 38 < platform5.y + 15 and
+                                              player.x + 20 > platform5.x and player.x + 20 < platform5.x + 40) or
+                                             (player.y + 38 > disPlatform.y and player.y + 38 < disPlatform.y + 15 and
+                                              player.x + 20 > disPlatform.x and player.x + 20 < disPlatform.x + 40))) {
+                    player.speeding = 4.5;
+                    if (player.y + 38 > disPlatform.y and player.y + 38 < disPlatform.y + 15
+                        and player.x + 20 > disPlatform.x and player.x + 20 < disPlatform.x + 40) {
+                            disPlatform.disappear();
+                        }
                 }
+
+                txSetColor(RGB(255, 0, 125));
+                txSelectFont("Impact", 34);
+                txTextOut(10, 40, "Score:");
+                txTextOut(60, 40, player.strScore);
+
+                if (player.y > 810 and player.speeding < 0)
+                    death();
 
                 txSleep(2);
                 txClear();
