@@ -111,7 +111,36 @@ class Game {
 
 
         void death() {
-            DeathScreen death;
-            death.Run();
+            bool running = true;
+
+            HDC death_background = txLoadImage("data\\images\\start_background.bmp");
+            HDC restartButton = txLoadImage("data\\images\\restart.bmp");
+            HDC menuButton = txLoadImage("data\\images\\menu.bmp");
+
+            while (running) {
+                txBitBlt(txDC(), 0, 0, 400, 800, death_background, 0, 0);
+                txTransparentBlt(txDC(), (400 - 163) / 2, 200, 163, 78, restartButton, 0, 0, RGB(255, 255, 255));
+                txTransparentBlt(txDC(), (400 - 163) / 2, 350, 163, 78, menuButton, 0, 0, RGB(255, 255, 255));
+
+                while (txMouseButtons() != 1) {
+                    if ((400 + 163) / 2 >= txMouseX() and txMouseX() >= (400 - 163) / 2 and txMouseButtons() & 1
+                        and txMouseY() >= 200 and txMouseY() <= 363) {
+                        running = false;
+                        break;
+                    }
+
+                    if ((400 + 163) / 2 >= txMouseX() and txMouseX() >= (400 - 163) / 2 and txMouseButtons() & 1
+                        and txMouseY() >= 350 and txMouseY() <= 513) {
+                        running = false;
+                        break;
+                    }
+                }
+                Run();
+                txSleep(1);
+                txIDontWantToHaveAPauseAfterMyProgramBeforeTheWindowWillClose_AndIWillNotBeAskingWhereIsMyPicture();
+            }
+            txDeleteDC(death_background);
+            txDeleteDC(restartButton);
+            txDeleteDC(menuButton);
         }
 };
